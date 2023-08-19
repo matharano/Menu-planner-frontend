@@ -1,0 +1,50 @@
+.main {
+    background-color: #364933;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    float: left;
+    width: 40%;
+}
+
+.logo {
+    margin-right: 10px;
+    margin-top: 2px;
+    display: flex; /* Add display flex for image alignment */
+    align-items: center; /* Align image vertically within the div */
+}
+
+.title-text {
+    color: white;
+    font-family: 'Red Hat Display';
+    font-size: 18px;
+    font-weight: normal;
+    text-decoration: none;
+}
+
+.settings {
+    display: flex;
+    align-items: center;
+    float: right;
+    width: 40%;
+    justify-content: flex-end;
+}
+
+.avatar {
+    font-size: 15px;
+    font-family: 'Red Hat Display';
+    align-items: center;
+    display: flex;
+    height: 30px;
+    width: 30px;
+}

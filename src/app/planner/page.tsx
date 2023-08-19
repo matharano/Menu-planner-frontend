@@ -1,6 +1,5 @@
 'use client'
 // Components
-import Paper from '@mui/material/Paper';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -8,12 +7,10 @@ import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 
 // Icons
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Menu } from '@mui/material';
 import './.css'
 
 let menu_template = [
@@ -59,7 +56,7 @@ function load_template(template: dish_category[][]) {
 
 export default function App() {
     return (
-        <div className="white-board" style={{ margin:50, padding:10, backgroundColor:'white' }}>
+        <div className="white-board" style={{ margin:30, padding:10, paddingBottom:30, backgroundColor:'white' }}>
             <div className="white-board-menu" style={{ marginLeft: "20px" }} >
                 Cardápio do dia 05 de Agosto de 2023
             </div>
