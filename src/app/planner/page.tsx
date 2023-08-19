@@ -16,58 +16,71 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Menu } from '@mui/material';
 import './.css'
 
-let menu_template = {
-    0: [ // The numbers are the columns
+let menu_template = [
+    [ // The numbers are the columns
         {"name": "Arroz branco", "category": "Arroz branco"},
         {"name": "Arroz integral", "category": "Arroz integral"},
         {"name": "Feijão", "category": "Feijão"}
     ],
-    1: [
+    [
         {"name": "Carne bovina", "category": "Carne bovina"},
         {"name": "Frango", "category": "Frango"},
         {"name": "Peixe", "category": "Peixe"},
         {"name": "Proteína vegetal", "category": "Proteína vegetal"}
     ],
-    2: [
+    [
         {"name": "Guarnição 1", "category": "Guarnição"},
         {"name": "Guarnição 2", "category": "Guarnição"},
         {"name": "Guarnição 3", "category": "Guarnição"},
         {"name": "Guarnição 4", "category": "Guarnição"}
     ]
-};
+];
 
-function load_template() {
+type dish_category = { name: string; category: string;};
+
+function load_template(template: dish_category[][]) {
     return (
-        <>Template</>
+        template.map((col: dish_category[]) => {
+            return (
+                <div style={{ marginLeft: "20px", marginRight: "20px" }}>
+                    {col.map((dish_category: dish_category) => {
+                        return (
+                            <div style={{ marginTop: "20px" }}>
+                                {Card(dish_category)}
+                            </div>
+                        )
+                    })}
+                </div>
+            )
+        }
+        )
     )
-}
+};
 
 export default function App() {
     return (
-        <div className="white-board" style={{ margin:10, padding:10, backgroundColor:'white' }}>
-            <div className="white-board-menu">
+        <div className="white-board" style={{ margin:50, padding:10, backgroundColor:'white' }}>
+            <div className="white-board-menu" style={{ marginLeft: "20px" }} >
                 Cardápio do dia 05 de Agosto de 2023
             </div>
-            <div className='white-board-body'>
-                <div>
-                    <div style={{marginTop:"20px"}}>{Card("Arroz")}</div>
-                    <div style={{marginTop:"20px"}}>{Card("Arroz integral")}</div>
-                    <div style={{marginTop:"20px"}}>{Card("Feijão")}</div>
-                </div>
+            <div className='white-board-body' >
+                {load_template(menu_template)}
             </div>
         </div>
     );
 }
 let cost = 0
 
-function Card( name: string ) {
+function Card( dish_category: dish_category ) {
+    const category = dish_category.category
+
     return (
             <Accordion className='card' >
                  <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     className='card-menu'
                  >
-                    {name}
+                    {dish_category.name}
                  </AccordionSummary>
                  <AccordionDetails className='form' sx={{ p: 2 }}>
                     <Autocomplete
