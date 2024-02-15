@@ -18,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt">
-      <body className={inter.className} style={{ backgroundImage: `url(${img.src})` }} >
+      <body className={inter.className} style={{ backgroundImage: `url(${img.src})`, backgroundSize: "cover"}} >
         <MenuBar />
         {children}
       </body>
