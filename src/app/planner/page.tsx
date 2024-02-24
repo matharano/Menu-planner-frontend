@@ -72,16 +72,32 @@ export default function App() {
         </div>
     );
 }
-let cost = 0
 
 function Card( dish_category: dish_category ) {
     const category = dish_category.category;
-    const [cost, setCost] = React.useState('');
+    const [cost, setCost] = React.useState<number | null>(null);
     const [completed, setCompleted] = React.useState(false);
+    
+    type Dish = {[key: string]: {cost: number; observation: string}};
 
-    const handleChange = (event:SelectChangeEvent) => {
-        setCost(event.target.value as string);
+    let dish_options:Dish = {
+        "Arroz branco": {"cost": 0, "observation": ""},
+        "Sem alho": {"cost": 1, "observation": ""},
+        "Com salsinha e couve-flor": {"cost": 2, "observation": "Couve-flor picadinha"}
     };
+
+    const handleCostChange = (value:number) => {
+        setCost(value);
+        console.log(typeof(value))
+    };
+
+    const handleDishChange = (event: any, newInputValue: string) => {
+        setCompleted(newInputValue.length > 0);
+        if (Object.keys(dish_options).includes(newInputValue)) {
+            setCost(dish_options[newInputValue]["cost"])
+        }
+    };
+
 
     return (
             <Accordion className='card' >
@@ -98,9 +114,9 @@ function Card( dish_category: dish_category ) {
                         id=''
                         className='dish'
                         size='small'
-                        options={['Example 1', 'Example 2', '3 example']}
-                        onInputChange={(event, newInputValue) => {setCompleted(newInputValue.length > 0)}}
-                        renderInput={(params: any ) => <TextField {...params} label="Prato" className='dish' />}
+                        options={Object.keys(dish_options)}
+                        onInputChange={handleDishChange}
+                        renderInput={(params: any ) => <TextField {...params} value={1} label="Prato" className='dish' />}
                     />
                     <div className='obs-and-cost' >
                         <TextField className='obs' label="Observação" size='small' multiline={true} rows={5} ></TextField>
@@ -111,14 +127,14 @@ function Card( dish_category: dish_category ) {
                                 id="demo-simple-select-helper"
                                 label="Custo"
                                 size='small'
-                                value={cost}
-                                onChange={handleChange}
+                                value={String(cost)}
+                                onChange={(event: SelectChangeEvent) => handleCostChange(Number(event.target.value))}
                             >
-                                <MenuItem value={1} >Muito barato</MenuItem>
-                                <MenuItem value={2} >Barato</MenuItem>
-                                <MenuItem value={3} >Neutro</MenuItem>
-                                <MenuItem value={4} >Caro</MenuItem>
-                                <MenuItem value={5} >Muito caro</MenuItem>
+                                <MenuItem value={0} >Muito barato</MenuItem>
+                                <MenuItem value={1} >Barato</MenuItem>
+                                <MenuItem value={2} >Neutro</MenuItem>
+                                <MenuItem value={3} >Caro</MenuItem>
+                                <MenuItem value={4} >Muito caro</MenuItem>
                             </Select>
                         </FormControl>
                     </div>
